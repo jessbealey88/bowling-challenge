@@ -5,6 +5,7 @@ describe('Frame', () =>{
         const frame = new Frame();
         frame.roll(5);
         expect(frame.score()).toBe(5);
+        expect(frame.endFrame()).toBe(false);
     });
 
     it('Scores two rolls', () => {
@@ -12,6 +13,7 @@ describe('Frame', () =>{
         frame.roll(5);
         frame.roll(3);
         expect(frame.score()).toBe(8);
+        expect(frame.endFrame()).toBe(true);
     });
 
     it('logs a strike', () => {
@@ -19,6 +21,7 @@ describe('Frame', () =>{
         frame.roll(10);
         expect(frame.score()).toBe(10);
         expect(frame.strike()).toBe(true);
+        expect(frame.endFrame()).toBe(true);
     })
 
     it('logs a spare', () => {
@@ -27,7 +30,7 @@ describe('Frame', () =>{
         frame.roll(5);
         expect(frame.score()).toBe(10);
         expect(frame.spare()).toBe(true);
-
+        expect(frame.endFrame()).toBe(true);
     })
 
 
