@@ -7,12 +7,22 @@ class ScoreCard {
     };
     
     addNewFrames(){
-        this.frames.push(new Frame());
+        if(this.frames.length == 0){
+            for (let i = 0; i < 10; i++) {
+                this.frames.push(new Frame());
+            };
+        };
+
     };
 
     addRolls(pins){
+        if(this.frames[this.frame_index].endOfFrame == false){
+            this.frames[this.frame_index].roll(pins);
+        }else {
+            this.frame_index ++;
+            this.frames[this.frame_index].roll(pins);
+        };
     
-        this.frames[this.frame_index].roll(pins);
     }
 
     allFrames(){
