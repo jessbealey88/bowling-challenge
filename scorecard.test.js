@@ -46,4 +46,54 @@ describe('ScoreCard', () => {
         expect(scorecard.allFrames()[1].scoreCount).toEqual(2);
         
     });
-});
+
+    it('moves to next frame after a strike', () => {
+        scorecard.addNewFrames();
+        scorecard.addRolls(10);
+        scorecard.addRolls(2);
+        expect(scorecard.allFrames()[0].scoreCount).toEqual(10);
+        expect(scorecard.allFrames()[1].scoreCount).toEqual(2);     
+    });
+
+    it('strikeBonus method adds the bonus if the next 2 rolls are normal', () => {
+        scorecard.addNewFrames();
+        scorecard.addRolls(10);
+        scorecard.addRolls(2);
+        scorecard.addRolls(2);
+        scorecard.strikeBonus();
+        expect(scorecard.allFrames()[0].scoreCount).toEqual(14);
+        expect(scorecard.allFrames()[1].scoreCount).toEqual(4);     
+    });
+
+    it('getFinalScore method works using the strikeBonus method', () => {
+        scorecard.addNewFrames();
+        scorecard.addRolls(10);
+        scorecard.addRolls(10);
+        scorecard.addRolls(2);
+        scorecard.addRolls(4);
+        expect(scorecard.getFinalScore()).toEqual(44);
+    });
+
+    it('spareBonus method adds bonus', () => {
+        scorecard.addNewFrames();
+        scorecard.addRolls(5);
+        scorecard.addRolls(5);
+        scorecard.addRolls(2);
+        scorecard.spareBonus();
+        expect(scorecard.allFrames()[0].scoreCount).toEqual(12);
+   
+    });
+    it('getFinalScore method uses both bonus methods', () => {
+        scorecard.addNewFrames();
+        scorecard.addRolls(10);
+        scorecard.addRolls(10);
+        scorecard.addRolls(5);
+        scorecard.addRolls(5);
+        scorecard.addRolls(5);
+        expect(scorecard.getFinalScore()).toEqual(65);
+    });
+
+
+
+    });
+
